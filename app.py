@@ -15,13 +15,14 @@ def predict():
 	lr = joblib.load("questionmodel.pkl")
 	if lr:
 		try:
-			json = request.get_json()	 
+			json = request.get_json()
 			model_columns = joblib.load("questionmodel_cols.pkl")
-			temp=list(json[0].values())
-			vals=np.array(temp)
-			prediction = lr.predict(temp)
-			print("here:",prediction)        
-			return jsonify({'prediction': str(prediction[0])})
+			#temp=list(json[0].values())
+			vals=np.array([[json[0][0]['CurrentQuestion'],json[0][0]['TimeTakenToAnswer'],json[0][0]['AnswerStatus']]])
+			prediction = lr.predict(vals)
+			print("here:",prediction)
+            
+			return jsonify({'prediction': str(prediction)})
 
 		except:        
 			return jsonify({'trace': traceback.format_exc()})
