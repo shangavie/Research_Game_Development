@@ -12,11 +12,11 @@ def hello():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-	lr = joblib.load("model.pkl")
+	lr = joblib.load("questionmodel.pkl")
 	if lr:
 		try:
 			json = request.get_json()	 
-			model_columns = joblib.load("model_cols.pkl")
+			model_columns = joblib.load("questionmodel_cols.pkl")
 			temp=list(json[0].values())
 			vals=np.array(temp)
 			prediction = lr.predict(temp)
