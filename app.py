@@ -18,7 +18,6 @@ def predict():
 			json = request.get_json()	 
 			model_columns = joblib.load("questionmodel_cols.pkl")
 			temp=list(json[0].values())
-            print(temp)
 			vals=np.array(temp)
 			prediction = lr.predict(temp)
 			print("here:",prediction)        
